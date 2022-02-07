@@ -1,10 +1,6 @@
-class Hello extends React.Component {
-    render() {
-      return React.createElement('div', null, `Hello World`);
-    }
-  }
+const helloWorld = React.createElement('h1', {}, 'Hello world!');
   
   ReactDOM.render(
-    React.createElement(Hello),
+    helloWorld,
     document.getElementById('root')
   );
