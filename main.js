@@ -74,26 +74,44 @@ ReactDOM.render(<Clock />, document.querySelector('#app'));
 }
 
 ReactDOM.render(<Clock />, document.querySelector('#app'));  */
-
+let textColor = { color: 'black' };
 
 function Clock(props) {
     React.useEffect(() => {
-        tick();        
-    }, []);
-    
+        tick();
+        //setStyle(textColor);       
+    });
     const [date, setDate] = React.useState(new Date());
+    
+    const [divStyle, setStyle] = React.useState(textColor);
 
     const tick = () => {
+        
         setInterval(() => {
-            setDate(new Date())
+            setDate(new Date());
+            setStyle(textColor);
         }, 1000)
     }
     
+    const triggerRandomColor = (e) => {
+      e.preventDefault();
+      textColor = {color: 'blue'};
+    }
+
+    const triggerDefaultColor = (e) => {
+      e.preventDefault();
+      textColor = {color: 'black'};
+    }
 
     return (
         <div>
             <h1>Hello world</h1>
-            <h2>Il est {date.toLocaleTimeString()}.</h2>
+            <h2 style={divStyle}>Il est {date.toLocaleTimeString()}.</h2>
+            <button onClick={triggerRandomColor}>Couleur Aléatoire</button>
+            <button onClick={triggerDefaultColor}>Couleur par défaut</button>
+            <br/>
+            <button onClick={triggerRandomColor}>Arrêt Horloge</button>
+            <button onClick={triggerDefaultColor}>Reprise Horloge</button>
         </div>
         );
 }
