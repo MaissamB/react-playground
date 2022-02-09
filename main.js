@@ -1,4 +1,4 @@
-function UserGreeting(props) {
+/*function UserGreeting(props) {
     return <h1>Bienvenue !</h1>;
   }
   
@@ -35,5 +35,40 @@ function UserGreeting(props) {
   
   ReactDOM.render(
     <Greeting />,
+    document.querySelector('#app')
+  );*/
+
+
+  function Cards(props){
+    return(
+        <React.Fragment>
+            <p></p>
+        </React.Fragment>
+    )
+  }
+
+
+function App(props){
+    const [users, setUsers] = React.useState([]);
+    React.useEffect(() =>{
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => setUsers(data))
+    },[])
+
+    React.useEffect(() =>{
+        console.log(users);
+    },[users])
+
+    return(
+        <React.Fragment>
+        {users.map((users) => {return users.name})}            
+        </React.Fragment>
+    )
+}
+
+
+  ReactDOM.render(
+    <App/>,
     document.querySelector('#app')
   );
