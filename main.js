@@ -1,4 +1,4 @@
-function Clock(props) {
+/*function Clock(props) {
     React.useEffect(() => {
         tick();
     }, []);
@@ -34,14 +34,14 @@ function Clock(props) {
     }
     
 
-/*     return (
+    return (
         <div>
             <h1>Hello world</h1>
             <h2 style={{color: textColor}}>Il est {date.toLocaleTimeString()}.</h2>
             <button onClick={changeColor}>Changer couleur</button>
             <button onClick={resetColor}>Réinitialiser couleur</button>
         </div>
-        ); */
+        ); 
 
         // Solution Bonus
 
@@ -58,6 +58,61 @@ function Clock(props) {
 ReactDOM.render(<Clock />, document.querySelector('#app'));
 
 
+-----------------------------------Correction--------------------------------------
 
 
+function UserGreeting(props) {
+  return <h1>Bienvenue !</h1>;
+}
 
+function GuestGreeting(props) {
+  return <h1>Veuillez vous inscrire.</h1>;
+}
+function Greeting(props) {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  const changeValue = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
+  return (
+    <React.Fragment>
+      {isLoggedIn ? <UserGreeting /> : <GuestGreeting />}
+      <button onClick={changeValue}>
+        {isLoggedIn ? "Se déconnecter" : "Se connecter"}
+      </button>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.render(<Greeting />, document.getElementById("app"));
+
+*/
+
+function UserGreeting(props) {
+  return <h1>Bienvenue !</h1>;
+}
+
+function GuestGreeting(props) {
+  return <h1>Veuillez vous inscrire.</h1>;
+}
+
+
+function Greeting(props) {
+  const [logged, setLogged] = React.useState(props.isLoggedIn);
+
+  const connect = () => {
+    setLogged(!logged);
+  }
+
+  return (<React.Fragment>
+      {logged ? <UserGreeting /> : <GuestGreeting /> }
+      <button onClick={connect}>{logged ? "Déconnection" : "Connection"}</button>
+  </React.Fragment>)      
+
+}
+
+ReactDOM.render(
+  <Greeting isLoggedIn={false} />,
+  document.querySelector('#app')
+);
