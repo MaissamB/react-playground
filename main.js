@@ -34,7 +34,6 @@
       );
     }
   }
- */
 
 
 function NameForm(props) {
@@ -109,7 +108,7 @@ function NameForm(props) {
         </form>
       );
     }
-  } */
+  } 
 
 function EssayForm(props) {
     const [text, setText] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
@@ -184,7 +183,7 @@ function EssayForm(props) {
         </form>
       );
     }
-  } */
+  } 
 
 function FlavorForm(props) {
     const [value, setValue] = React.useState('coconut');
@@ -243,7 +242,7 @@ function MultiForm(props) {
         [inputs]
     )
 
- */
+ 
 
     
     const handleChange = ({target: {name, value}}) => {
@@ -285,4 +284,119 @@ function MultiForm(props) {
     )
 }
 
-ReactDOM.render(<MultiForm />, document.querySelector('#app'));
+ReactDOM.render(<MultiForm />, document.querySelector('#app'));*/
+
+function BaseNumberInput(props){
+  return(
+    <label>
+      {props.name} : 
+      <input type="text" name={props.name} value={props.value}  onChange={props.onChangeBase} />
+    </label>
+  );
+}
+
+//
+
+function App(props){
+  const [values , setValues] = React.useState({
+    number : '',
+    binary: ''
+  });
+
+  const handleChange=({ target: { name, value }}) => {
+    setValues(state => ({...state, [name]: value}), [])
+    if (name === "number"){
+      console.log("number")
+    }
+    if (name === "binary"){
+      console.log("binary")
+    }
+
+  }
+
+  return (<div>
+      <BaseNumberInput name="number" value={values.number} onChangeBase={handleChange}/>
+      <BaseNumberInput name="binary" value={values.binary} onChangeBase={handleChange}/>
+    </div>
+  );
+}
+
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+
+
+
+
+/*----------------------------------------Correction--------------------------------------------
+
+const App = () => {
+  const [ base, setBase ] = React.useState(false);
+  const [decimal, setDecimal] = React.useState('');
+  const [convertedNumber, setConvertedNumber] = React.useState('');
+
+
+  React.useEffect(() => {
+    if(base) {
+      setConvertedNumber(parseInt(decimal, 10).toString(base))
+    }
+    
+
+  }, [decimal, base])
+
+
+  const handleChange = (value) => {
+    if(isNaN(value)) return
+    setDecimal(value);
+    // setConvertedNumber(parseInt(decimal, 10).toString(2))
+  }
+
+  const changeBase = (e) => {
+    console.log("change");
+    setBase(e.target.value)
+
+  }
+
+
+
+  return(
+    <React.Fragment>
+      <BaseNumberInput number={decimal} onChangeBase={handleChange}>Décimal</BaseNumberInput>
+      <SelectBaseInput selectedBase={base} changeBase={changeBase}/>
+      {base && <BaseNumberInput number={convertedNumber} onChangeBase={handleChange}>Binaire</BaseNumberInput>}
+    </React.Fragment>
+  )
+
+}
+
+
+const BaseNumberInput = ({ onChangeBase, number, base, children}) => {
+
+
+  return(
+    <div>
+      <label>{children}</label>
+      <input value={number} type="text" onChange={(e) =>onChangeBase(e.target.value)} />
+    </div>
+  )
+
+}
+
+const SelectBaseInput = ({ selectedBase, changeBase}) => {
+
+
+
+  return(
+
+    <select value={selectedBase} onChange={changeBase}>
+      <option value={false} disabled>Choississez une option</option>
+      <option value="2">Binaire</option>
+      <option value="3">Ternaire</option>
+      <option value="7">Septénaire</option>
+      <option value="16">Héxadécimal</option>
+    </select>
+  )
+}
+
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+*/
