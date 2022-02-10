@@ -102,3 +102,83 @@ function App(props){
 }
 
 ReactDOM.render(<App/>, document.querySelector('#app'))
+
+/* 
+-----------------------------------Correction par Julien----------------------------------
+
+const FlavorInput = ({ flavor, handleChange }) => {
+
+  return (
+    <label>
+      Choisissez votre parfum favori :
+      <select name="flavor" value={flavor} onChange={handleChange}>
+        <option value="grapefruit">Pamplemousse</option>
+        <option value="lime">Citron vert</option>
+        <option value="coconut">Noix de coco</option>
+        <option value="mango">Mangue</option>
+      </select>
+    </label>
+  );
+};
+
+const EssayInput = ({ essay, handleChange }) => {
+
+  return (
+    <label>
+      Essay:
+      <textarea name="essay" value={essay} onChange={handleChange} />
+    </label>
+  );
+};
+
+const NameInput = ({ name, handleChange }) => {
+
+  return (
+    <label>
+      Nom :
+      <input name="name" type="text" value={name} onChange={handleChange} />
+    </label>
+  );
+};
+
+const MonSuperForm = () => {
+
+  const [inputs, setInputs] = React.useState({
+    name : '',
+    essay: '',
+    flavor: 'grapefruit'
+  });
+
+  React.useEffect(() => {
+    console.log(inputs);
+  }, [inputs])
+
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
+  const handleChange = ({ target: { name, value }}) => {
+    setInputs(prevState => ({
+      ...prevState,
+      [name] : value
+    }))
+
+  }
+
+
+  return(
+    <form onSubmit={handleSubmit}>
+      <NameInput name={inputs.name} handleChange={handleChange} />
+      <EssayInput essay={inputs.essay} handleChange={handleChange}/>
+      <FlavorInput flavor={inputs.flavor} handleChange={handleChange} />
+      <input type="submit" value="ENVOYEEEER" />
+    </form>
+  )
+}
+
+ReactDOM.render(<MonSuperForm />, document.querySelector("#app"));
+
+*/
