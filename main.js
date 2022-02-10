@@ -37,88 +37,67 @@ function UserCard({user}) {
 ReactDOM.render(<App/>, document.querySelector('#app'))*/
 
 function NameForm (props) {
-  
-  const [state, setState] = React.useState(' ');
-
-
-  const handleChange=(event)=> {
-    setState(event.target.value);
-  }
-
-  const handleSubmit=(event)=> {
-    alert('Le nom a été soumis : ' + state);
-    event.preventDefault();
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
       <label>
         Nom :
-        <input type="text" value={state} onChange={handleChange} />
+        <input type="text" value={props.value} onChange={props.onChange} />
       </label>
-      <input type="submit" value="Envoyer" />
-    </form>
   );
 }
 
 function EssayForm (props) {
-  const [state, setState] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
-
-  const handleChange = (event) => {
-    setState(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    alert('Un essai a été envoyé : ' + state);
-    event.preventDefault();
-  }
     return (
-      <form onSubmit={handleSubmit}>
         <label>
           Essay:
-          <textarea value={state} onChange={handleChange} />
+          <textarea value={props.value} onChange={props.onChange} />
         </label>
-        <input type="submit" value="Envoyer" />
-      </form>
     );
 }
 
 function FlavorForm (props) {
-  const [state, setState] = React.useState('coconut');
-
-  const handleChange = (event) => {
-    setState(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    alert('Votre parfum favori est : ' + state);
-    event.preventDefault();
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
       <label>
         Choisissez votre parfum favori :
-        <select value={state} onChange={handleChange}>
+        <select value={props.value} onChange={props.onChange}>
           <option value="grapefruit">Pamplemousse</option>
           <option value="lime">Citron vert</option>
           <option value="coconut">Noix de coco</option>
           <option value="mango">Mangue</option>
         </select>
       </label>
-      <input type="submit" value="Envoyer" />
-    </form>
   );
 }
 
 function App(props){
+  const [flavor, setFlavor] = React.useState('coconut');
+  const [essay, setEssay] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
+  const [name, setName] = React.useState(' ');
+
+  const handleFlavorChange = (event) => {
+    setFlavor(event.target.value);
+  }
+
+  const handleEssayChange = (event) => {
+    setEssay(event.target.value);
+  }
+
+  const handleNameChange=(event)=> {
+    setName(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    alert('Le User dont le nom est '+name+' et dont le parfum favori est -' + flavor+'- a écrit un essai : ' + essay);
+    event.preventDefault();
+  }
+
 
   return (
-     <div>
-       <FlavorForm/>
-       <EssayForm/>
-       <NameForm/>
-     </div>
+       <form onSubmit={handleSubmit}>
+        <FlavorForm value={flavor} onChange={handleFlavorChange}/>
+        <EssayForm value={essay} onChange={handleEssayChange}/>
+        <NameForm value={name} onChange={handleNameChange} />
+        <input type="submit" value="Envoyer" />
+      </form>
   )
 }
 
