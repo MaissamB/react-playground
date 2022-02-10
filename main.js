@@ -36,102 +36,90 @@ function UserCard({user}) {
 
 ReactDOM.render(<App/>, document.querySelector('#app'))*/
 
-class NameForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
+function NameForm (props) {
+  
+  const [state, setState] = React.useState(' ');
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+
+  const handleChange=(event)=> {
+    setState(event.target.value);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('Le nom a été soumis : ' + this.state.value);
+  const handleSubmit=(event)=> {
+    alert('Le nom a été soumis : ' + state);
     event.preventDefault();
   }
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Nom :
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Envoyer" />
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Nom :
+        <input type="text" value={state} onChange={handleChange} />
+      </label>
+      <input type="submit" value="Envoyer" />
+    </form>
+  );
 }
 
-class EssayForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'Écrivez un essai à propos de votre élément du DOM préféré'
-    };
+function EssayForm (props) {
+  const [state, setState] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const handleChange = (event) => {
+    setState(event.target.value);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('Un essai a été envoyé : ' + this.state.value);
+  const handleSubmit = (event) => {
+    alert('Un essai a été envoyé : ' + state);
     event.preventDefault();
   }
-
-  render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
           Essay:
-          <textarea value={this.state.value} onChange={this.handleChange} />
+          <textarea value={state} onChange={handleChange} />
         </label>
         <input type="submit" value="Envoyer" />
       </form>
     );
-  }
 }
 
-class FlavorForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: 'coconut'};
+function FlavorForm (props) {
+  const [state, setState] = React.useState('coconut');
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const handleChange = (event) => {
+    setState(event.target.value);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('Votre parfum favori est : ' + this.state.value);
+  const handleSubmit = (event) => {
+    alert('Votre parfum favori est : ' + state);
     event.preventDefault();
   }
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Choisissez votre parfum favori :
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Pamplemousse</option>
-            <option value="lime">Citron vert</option>
-            <option value="coconut">Noix de coco</option>
-            <option value="mango">Mangue</option>
-          </select>
-        </label>
-        <input type="submit" value="Envoyer" />
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Choisissez votre parfum favori :
+        <select value={state} onChange={handleChange}>
+          <option value="grapefruit">Pamplemousse</option>
+          <option value="lime">Citron vert</option>
+          <option value="coconut">Noix de coco</option>
+          <option value="mango">Mangue</option>
+        </select>
+      </label>
+      <input type="submit" value="Envoyer" />
+    </form>
+  );
 }
+
+function App(props){
+
+  return (
+     <div>
+       <FlavorForm/>
+       <EssayForm/>
+       <NameForm/>
+     </div>
+  )
+}
+
+ReactDOM.render(<App/>, document.querySelector('#app'))
