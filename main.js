@@ -36,16 +36,26 @@
   ReactDOM.render(
     <Greeting />,
     document.querySelector('#app')
-  );*/
+  );
 
 
-  function Cards(props){
-    return(
-        <React.Fragment>
-            <p></p>
-        </React.Fragment>
-    )
-  }
+  const UserCard = (props) => {
+    let { name, email, phone, website, company } = props.user;
+  
+    React.useEffect(() => {
+      console.log(props.user);
+    }, []);
+  
+    return (
+      <ul>
+        <li>{name}</li>
+        <li>{email}</li>
+        <li>{phone}</li>
+        <li>{website}</li>
+        <li>{company.name}</li>
+      </ul>
+    );
+  };
 
 
 function App(props){
@@ -62,13 +72,67 @@ function App(props){
 
     return(
         <React.Fragment>
-        {users.map((users) => {return users.name})}            
+        {users.map((user) => (
+        <UserCard key={user.id} user={user} />
+      ))}            
         </React.Fragment>
     )
 }
 
 
   ReactDOM.render(
+    <App/>,
+    document.querySelector('#app')
+  );
+
+ ------------------------------------------exo8-b--------------------------------------------*/
+
+
+ function App(props){
+    const [pokedata, setPokedata] = React.useState([]);
+    React.useEffect(() =>{
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+        .then(response => response.json())
+        .then(data => setPokedata(data.results))        
+    },[])
+
+    React.useEffect(()=>{
+            //console.log(pokedata);
+    },[pokedata])
+
+    return(
+        <React.Fragment>
+            {pokedata.map((pokemon) => (
+                <PokeCard key={pokemon.name} {...pokemon} />
+            ))}                  
+        </React.Fragment>
+    )
+}
+
+const PokeCard = (props) => {
+    const [pokemon, setPokemon] = React.useState({});
+    const [url, setUrl] = React.useState("")
+    console.log (props.pokemon);
+        React.useEffect(() =>{
+            fetch(props.url)
+            .then(response => response.json())
+            .then(data => {setPokemon(data), setUrl(data.sprites.front_default)})        
+        },[])
+        
+  
+    return (
+      <ul>
+        <li>{pokemon.name}</li>
+        <li><img src={url}/></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    );
+  };
+
+
+ ReactDOM.render(
     <App/>,
     document.querySelector('#app')
   );
